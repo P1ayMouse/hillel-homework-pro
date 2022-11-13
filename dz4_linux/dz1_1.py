@@ -12,11 +12,12 @@ year_today = datetime.now().year
 days_count = monthrange(year_today, month_today)[1]
 
 os.chdir("dz1")
-for day in range(1, days_count + 1):
-    subprocess.call(["touch", f"{day}-{month_today}-{year_today}.log"])
+all_days_log = [f"{day}-{month_today}-{year_today}.log" for day in range(1, days_count + 1)]
+all_days_log.insert(0, "touch")
+subprocess.call(all_days_log)
 os.chdir("..")
 
-subprocess.call(["sudo", "chown", "root:root", "dr1"])
+subprocess.call(["sudo", "chown", "-R", "root:root", "dz1"])
 
 os.chdir("dz1")
 month_days = [i for i in range(1, days_count + 1)]
